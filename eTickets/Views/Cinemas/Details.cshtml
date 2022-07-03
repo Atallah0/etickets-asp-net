@@ -1,0 +1,52 @@
+﻿@model Cinemas
+
+@{
+    ViewData["Title"] = "Details of the cinema";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Details for @Model.name</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="form-group text-center">
+                    <img class="border-info rounded-circle" style="max-width: 150px" id="cinemaLogoPreview" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="cinemaLogo" class="control-label"></label>
+                    <input asp-for="cinemaLogo" class="form-control" readonly />
+                    <span asp-validation-for="cinemaLogo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="name" class="control-label"></label>
+                    <input asp-for="name" class="form-control" readonly />
+                    <span asp-validation-for="name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="description" class="control-label"></label>
+                    <input asp-for="description" class="form-control" readonly />
+                    <span asp-validation-for="description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                    }
+                    <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<script>
+    $(document).ready(function () {
+        var output = document.getElementById('cinemaLogoPreview');
+        output.src = $("#cinemaLogo").val();
+    })
+</script>
+}

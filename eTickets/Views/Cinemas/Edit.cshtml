@@ -1,0 +1,57 @@
+﻿@model Cinemas
+
+@{
+    ViewData["Title"] = "Update cinema";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Update Cinema</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group text-center">
+                        <img id="cinemaLogoPreview"  class="border-info rounded-circle" style="max-width: 150px" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="cinemaLogo" class="control-label"></label>
+                        <input asp-for="cinemaLogo" class="form-control" />
+                        <span asp-validation-for="cinemaLogo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="name" class="control-label"></label>
+                        <input asp-for="name" class="form-control" />
+                        <span asp-validation-for="name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="description" class="control-label"></label>
+                        <input asp-for="description" class="form-control" />
+                        <span asp-validation-for="description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('cinemaLogoPreview');
+            output.src = $("#cinemaLogo").val();
+        })
+        $("#cinemaLogo").on("change", function () {
+            var output = document.getElementById('cinemaLogoPreview');
+            output.src = $(this).val();
+        })
+    </script>
+}
